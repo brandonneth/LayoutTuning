@@ -1,0 +1,3 @@
+Mean Runtime Report (sec.)  ,  ,  ,  ,  ,  , 
+Kernel       , DGZ      , DZG      , GDZ      , GZD      , ZDG      , ZGD     
+Apps_LTIMES  , 4.739013 , 0.304934 , 4.292035 , 0.580889 , 0.246469 , 0.401629

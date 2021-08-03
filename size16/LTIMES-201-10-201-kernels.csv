@@ -1,0 +1,2 @@
+Kernels       ,    Problem size ,    Reps ,    Iterations/rep , Kernels/rep ,    Bytes/rep ,    FLOPS/rep
+Apps_LTIMES   ,        15990784 ,      50 ,          15990784 ,           1 ,    227881472 ,    799539200

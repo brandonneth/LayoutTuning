@@ -1,0 +1,3 @@
+Speedup Report (T_ref/T_var): ref var = DGZ  ,  ,  ,  ,  ,  , 
+Kernel       , DGZ   , DZG   , GDZ   , GZD   , ZDG   , ZGD  
+Apps_LTIMES  , 1.000 , 6.823 , 1.399 , 7.765 , 12.643 , 9.575
