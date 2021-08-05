@@ -52,6 +52,14 @@ df_t = df.merge(scores)
 print(df_t)
 
 
-import plotnine as pp
+from plotnine import *
 
-(ggplot(df_t, aes('Score', 'Time')))
+figure = (ggplot(df_t, aes('Score', 'Time', color='factor(Size)'))
+	+ geom_point()
+	+ stat_smooth(method='lm')
+	+ facet_wrap('~Size', scales='free'))
+
+print(figure)
+
+
+
