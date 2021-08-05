@@ -27,17 +27,17 @@ def extract_variant_time_pairs(timingFilename):
 
 def variant_to_perm(v):
 	if v == "DGZ":
-		return "012"
+		return "0213"
 	elif v == "DZG":
-		return "021"
+		return "0312"
 	elif v == "GDZ":
-		return "102"
+		return "2013"
 	elif v == "GZD":
-		return "120"
+		return "2301"
 	elif v == "ZGD":
-		return "210"
+		return "3012"
 	elif v == "ZDG":
-		return "201"
+		return "3201"
 	else:
 		return "INVALID VARIANT NAME" + v
 
