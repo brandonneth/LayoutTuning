@@ -46,20 +46,21 @@ ells = list(map(lambda x : [int(y) for y in x], allEll))
 import itertools
 layout_combos = list(itertools.product(phis, ells, phis))
 
-scores = accessAnalysis.kernel_scores_dataframe(params, [phi_access,ell_access,psi_access], kpols, layout_combos, columns=['ExecPolPerm', 'Phi', 'Ell', 'Psi', 'Score'])
+for repeat_factor in [[],[2,1,1]]:
+	scores = accessAnalysis.kernel_scores_dataframe(params, [phi_access,ell_access,psi_access], kpols, layout_combos, columns=['ExecPolPerm', 'Phi', 'Ell', 'Psi', 'Score'], repeat_factor=repeat_factor)
 
-df_t = df.merge(scores)
-print(df_t)
+	df_t = df.merge(scores)
+	print(df_t)
 
 
-from plotnine import *
+	from plotnine import *
 
-figure = (ggplot(df_t, aes('Score', 'Time', color='factor(Size)'))
-	+ geom_point()
-	+ stat_smooth(method='lm')
-	+ facet_wrap('~Size', scales='free'))
+	figure = (ggplot(df_t, aes('Score', 'Time', color='factor(Size)'))
+		+ geom_point()
+		+ stat_smooth(method='lm')
+		+ facet_wrap('~Size', scales='free'))
 
-print(figure)
+	print(figure)
 
 
 
