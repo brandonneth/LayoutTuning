@@ -35,8 +35,26 @@ def score(stride: StrideOrder) -> int:
 def access_to_score(params: LambdaParameters, args: AccessArguments, kpol: KernelPolicy, lpol: LayoutPolicy) -> int:
 	return score(apply_kpol(kpol, apply_lpol(lpol, apply_lambda(params, args))))
 
-def accesses_to_score(params: LambdaParameters, accesses: List[AccessArguments], kpol: KernelPolicy, lpols: List[LayoutPolicy]) -> int:
+def accesses_to_score(params: LambdaParameters, accesses: List[AccessArguments], kpol: KernelPolicy, lpols: List[LayoutPolicy], repeat_factor=[]) -> int:
+	if repeat_factor == []:
+		pass
+	else:
+		assert len(accesses) == len(repeat_factor)
+		repeated_accesses = [list(itertools.repeat(access,factor)) for access,factor in zip(accesses,repeat_factor)]
+		print(repeated_accesses)
+		accesses = []
+		for elem in repeated_accesses:
+			accesses += elem
+
+		repeated_lpols = [list(itertools.repeat(lpol,factor)) for lpol,factor in zip(lpols,repeat_factor)]
+		print(repeated_lpols)
+		lpols = []
+		for elem in repeated_lpols:
+			lpols += elem
+
+		
 	normalizedAccesses = [apply_lpol(lpol, access) for lpol,access in zip(lpols, accesses)]
+
 	scores = [access_to_score(params, access, kpol, lpol) for access,lpol in zip(accesses, lpols)]
 	return sum(scores)
 
@@ -117,9 +135,9 @@ df = pd.DataFrame(data, columns=header)
 print('dataframe:')
 print(df)
 
-def kernel_scores_dataframe(params: LambdaParameters, accesses: List[AccessArguments], all_kpols: List[KernelPolicy], all_lpols_combos: List[List[LayoutPolicy]], columns=[]) -> pd.DataFrame:
+def kernel_scores_dataframe(params: LambdaParameters, accesses: List[AccessArguments], all_kpols: List[KernelPolicy], all_lpols_combos: List[List[LayoutPolicy]], columns=[], repeat_factor=[]) -> pd.DataFrame:
 	combos = list(itertools.product(all_kpols, all_lpols_combos))
-	all_scores = [accesses_to_score(params, accesses, policy, layouts) for (policy, layouts) in combos]
+	all_scores = [accesses_to_score(params, accesses, policy, layouts, repeat_factor=repeat_factor) for (policy, layouts) in combos]
 	data = [[ ''.join([str(x) for x in policy])] + list(map((lambda l : ''.join([str(x) for x in l])), layouts)) + [score] for ((policy,layouts),score) in zip(combos,all_scores)]
 	return pd.DataFrame(data, columns=columns)
 
