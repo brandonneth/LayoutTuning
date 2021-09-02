@@ -1,3 +1,4 @@
+# Given the combined of performance results, creates the scores, matches them to the variants, and plots the performance against the variant's score. This ONLY works for the Ltimes benchmark, so this is a hardcoded file.
 import pandas as pd
 import sys
 

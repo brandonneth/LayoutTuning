@@ -1,3 +1,9 @@
+# Given a directory of RAJAPerf output files, checks that the checksum values are valid and then combines all the performance data into a single csv file.
+
+# Use: python3 check-and-combine.py OutputFile [directories with result files]
+
+
+
 import sys
 import os
 import string
